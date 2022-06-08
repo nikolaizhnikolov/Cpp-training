@@ -2,11 +2,38 @@
 //
 
 #include <iostream>
+#include <chrono>
+#include <functional>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+#include "Fibonacci.h"
+
+
+int main() {
+	int n = 15;
+
+	auto start = std::chrono::steady_clock::now();
+	std::cout << "Fibonacci number of " << n << " is: " << fibonacci(15) << std::endl;
+	auto end = std::chrono::steady_clock::now();
+
+	std::chrono::duration<double> duration = end - start;
+	std::cout << "Elapsed time: " << duration.count() << std::endl;
+
+	return 0;
 }
+
+//#include "SomeFunction.h"
+//
+//int main()
+//{
+//    std::cout << "Hello World!\n";
+//
+//    std::cout << SomeFunction::calculate(10, 15) << std::endl;
+//
+//    SomeFunction a(10);
+//    SomeFunction b(20);
+//
+//    std::cout << SomeFunction::calculate(a, b);
+//}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
