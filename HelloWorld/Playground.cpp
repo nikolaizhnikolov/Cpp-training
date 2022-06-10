@@ -11,52 +11,46 @@
 #include "GraphLib.h"
 #include "DisjointSet.h"
 
+#include <vector>
+#include <set>
+#include "SortLib.h"
 
 int main() {
 	std::shared_ptr<Graph> graph = std::make_shared<Graph>();
 	std::vector<GEdge> queries;
+	std::vector<std::shared_ptr<int>> sortingValues;
 
-
-	std::ifstream data("graph_pairs.txt");
+	std::ifstream data("sorting_values.txt");
 	if (data.is_open()) {
-		int pairNumber;
-		data >> pairNumber;
-		for (int i = 0; i < pairNumber; i++) {
-			int x, y;
-			data >> x >> y;
-			graph->addEdge(GEdge(x, y));
+		int values;
+		data >> values;
+		for (int i = 0; i < values; i++) {
+			int x;
+			data >> x;
+			sortingValues.push_back(std::make_shared<int>(x));
 		}
+		
+		//int pairNumber;
+		//data >> pairNumber;
+		//for (int i = 0; i < pairNumber; i++) {
+		//	int x, y;
+		//	data >> x >> y;
+		//	graph->addEdge(GEdge(x, y));
+		//}
 
-		int queryNumber;
-		data >> queryNumber;
-		for (int i = 0; i < queryNumber; i++) {
-			int x, y;
-			data >> x >> y;
-			queries.push_back(GEdge(x, y));
-		}
+		//int queryNumber;
+		//data >> queryNumber;
+		//for (int i = 0; i < queryNumber; i++) {
+		//	int x, y;
+		//	data >> x >> y;
+		//	queries.push_back(GEdge(x, y));
+		//}
 	}
 	data.close();
 
-
-	DisjointSet ds = DisjointSet(graph->getEdges());
-
-	std::vector<int> set = ds.getSet();
-	for (int i : set) 
-	{
-
-		std::cout << i << " ";
-	}
-	std::cout << std::endl;
-	for ( int i = 0; i < set.size(); i++)
-	{
-		std::cout << i << " ";
-	}
-	std::cout << std::endl;
-	for (GEdge e : queries)
-	{
-		std::cout << e.a << " and " << e.b << " are connected: " << ds.connected(e.a, e.b) << std::endl;
-	}
-
+	SortLib::bubbleSort(sortingValues);
+	for (std::shared_ptr<int> i : sortingValues) 
+		std::cout <<* i << " ";
 
 	return 0;
 }
