@@ -139,7 +139,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HelloWorld.cpp" />
+    <ClCompile Include="DisjointSet.cpp" />
+    <ClCompile Include="Fibonacci.cpp" />
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="GEdge.cpp" />
+    <ClCompile Include="GraphLib.cpp" />
+    <ClCompile Include="Playground.cpp" />
+    <ClCompile Include="SortLib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DisjointSet.h" />
+    <ClInclude Include="Fibonacci.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="GEdge.h" />
+    <ClInclude Include="GraphLib.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SortLib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="graph_pairs.txt" />
+    <Text Include="sorting_values.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

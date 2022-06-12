@@ -1,1 +1,2 @@
 C:\Main\Workspace\C++\Projects\HelloWorld\HelloWorld\x64\Debug\HelloWorld.exe
+C:\Main\Workspace\C++\Projects\Cpp-training\HelloWorld\x64\Debug\HelloWorld.exe
