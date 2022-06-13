@@ -48,7 +48,7 @@ int main() {
 	}
 	data.close();
 
-	SortLib::minSelectionSort(sortingValues);
+	SortLib<int>::selectionSort(sortingValues);
 	for (std::shared_ptr<int> i : sortingValues) 
 		std::cout <<* i << " ";
 
