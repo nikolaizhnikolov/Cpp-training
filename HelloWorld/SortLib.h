@@ -17,24 +17,23 @@ class SortLib
     // 
 
 public:
+
     static void bubbleSort(std::vector<std::shared_ptr<T>> values)
     {
-        for (typename std::vector<std::shared_ptr<T>>::reverse_iterator it = (values.rbegin() + 1); it != values.rend(); it++)
-        {
-            for (typename std::vector<std::shared_ptr<T>>::iterator jt = values.begin(); jt != it.base(); jt++)
-            {
-                if (*(*jt) > *(*(jt + 1))) {
-                    swap(*jt, *(jt + 1));
-                }
-            }
-        }
+        bubbleSort(values, false);
+    }
+    static void bubbleSort(std::vector<std::shared_ptr<T>> values, bool reverse)
+    {
+        if (reverse)
+            bubbleSort(values, std::less<T>());
+        else
+            selectionSort(values, std::greater<T>());
     }
 
     static void selectionSort(std::vector<std::shared_ptr<T>> values)
     {
         selectionSort(values, false);
     }
-
     static void selectionSort(std::vector<std::shared_ptr<T>> values, bool reverse)
     {
         if(reverse)
@@ -49,6 +48,19 @@ private:
         T c = *a;
         *a = *b;
         *b = c;
+    }
+
+    static void bubbleSort(std::vector<std::shared_ptr<T>> values, std::function<bool(T, T)> comparator)
+    {
+        for (typename std::vector<std::shared_ptr<T>>::reverse_iterator it = (values.rbegin() + 1); it != values.rend(); it++)
+        {
+            for (typename std::vector<std::shared_ptr<T>>::iterator jt = values.begin(); jt != it.base(); jt++)
+            {
+                if (comparator (* (*jt), *(*(jt + 1)))) {
+                    swap(*jt, *(jt + 1));
+                }
+            }
+        }
     }
 
     static void selectionSort(std::vector<std::shared_ptr<T>> values, std::function<bool(T, T)> comparator)
