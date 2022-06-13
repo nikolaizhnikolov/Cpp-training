@@ -17,6 +17,10 @@ class SortLib
     // 
 
 public:
+    static void sort(std::vector<std::shared_ptr<T>> values)
+    {
+        selectionSort(values, false);
+    }
 
     static void bubbleSort(std::vector<std::shared_ptr<T>> values)
     {
