@@ -31,7 +31,7 @@ public:
         if (reverse)
             bubbleSort(values, std::less<T>());
         else
-            selectionSort(values, std::greater<T>());
+            bubbleSort(values, std::greater<T>());
     }
 
     static void selectionSort(std::vector<std::shared_ptr<T>> values)
@@ -44,6 +44,18 @@ public:
             selectionSort(values, std::less<T>());
         else
             selectionSort(values, std::greater<T>());
+    }
+
+    static void insertionSort(std::vector<std::shared_ptr<T>> values)
+    {
+        insertionSort(values, false);
+    }
+    static void insertionSort(std::vector<std::shared_ptr<T>> values, bool reverse)
+    {
+        if(reverse)
+            insertionSort(values, std::less<T>());
+        else
+            insertionSort(values, std::greater<T>());
     }
 
 private:
@@ -81,6 +93,22 @@ private:
             swap(max, *it);
         }
         return;
+    }
+
+    static void insertionSort(std::vector<std::shared_ptr<T>> values, std::function<bool(T, T)> comparator)
+    {
+        int counter = 0;
+        for (typename std::vector<std::shared_ptr<T>>::iterator it = std::next(values.begin() + counter); it != values.end(); it++, counter++)
+        {
+            T key = *(*it);
+            typename std::vector<std::shared_ptr<T>>::iterator jt = std::next(values.begin() + counter);
+            while (jt != values.begin() && comparator( *(*(jt - 1)), key))
+            {
+                *(*jt) = *(*(jt - 1));
+                jt--;
+            }
+            *(*(jt)) = key;
+        }
     }
 };
 
