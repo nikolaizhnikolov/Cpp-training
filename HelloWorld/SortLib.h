@@ -32,23 +32,15 @@ public:
 
     static void selectionSort(std::vector<std::shared_ptr<T>> values)
     {
-        maxSelectionSort(values, std::less<T>());
+        selectionSort(values, false);
     }
 
-    static void maxSelectionSort(std::vector<std::shared_ptr<T>> values, std::function<bool(T,T)> f)
+    static void selectionSort(std::vector<std::shared_ptr<T>> values, bool reverse)
     {
-        for (typename std::vector<std::shared_ptr<T>>::reverse_iterator it = values.rbegin(); it != values.rend(); it++)
-        {
-            std::shared_ptr<T> max = *it;
-            for (typename std::vector<std::shared_ptr<T>>::iterator jt = values.begin(); jt != it.base(); jt++)
-            {
-                if (f(* (*jt), *(max))) {
-                    max = *jt;
-                }
-            }
-            swap(max, *it);
-        }
-        return;
+        if(reverse)
+            selectionSort(values, std::less<T>());
+        else
+            selectionSort(values, std::greater<T>());
     }
 
 private:
@@ -59,5 +51,20 @@ private:
         *b = c;
     }
 
+    static void selectionSort(std::vector<std::shared_ptr<T>> values, std::function<bool(T, T)> comparator)
+    {
+        for (typename std::vector<std::shared_ptr<T>>::reverse_iterator it = values.rbegin(); it != values.rend(); it++)
+        {
+            std::shared_ptr<T> max = *it;
+            for (typename std::vector<std::shared_ptr<T>>::iterator jt = values.begin(); jt != it.base(); jt++)
+            {
+                if (comparator(*(*jt), *(max))) {
+                    max = *jt;
+                }
+            }
+            swap(max, *it);
+        }
+        return;
+    }
 };
 
