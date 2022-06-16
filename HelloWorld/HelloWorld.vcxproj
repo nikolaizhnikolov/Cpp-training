@@ -145,7 +145,6 @@
     <ClCompile Include="GEdge.cpp" />
     <ClCompile Include="GraphLib.cpp" />
     <ClCompile Include="Playground.cpp" />
-    <ClCompile Include="SortLib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisjointSet.h" />
