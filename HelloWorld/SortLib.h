@@ -58,6 +58,18 @@ public:
             insertionSort(values, std::greater<T>());
     }
 
+    static void mergeSort(std::vector<std::shared_ptr<T>> values)
+    {
+        mergeSort(values, false);
+    }
+    static void mergeSort(std::vector<std::shared_ptr<T>> values, bool reverse)
+    {
+        if (reverse)
+            mergeSort(values, 0, values.size() - 1, std::less<T>());
+        else
+            mergeSort(values, 0, values.size() - 1, std::greater<T>());
+    }
+
 private:
     static void swap(std::shared_ptr<T> a, std::shared_ptr<T> b)
     {
@@ -109,6 +121,50 @@ private:
             }
             *(*(jt)) = key;
         }
+    }
+
+    static void mergeSort(std::vector<std::shared_ptr<T>> values, int start, int end, std::function<bool(T, T)> comparator)
+    {
+        if (start >= end) return;
+        int mid = (start + end) / 2;
+        mergeSort(values, start, mid, comparator);
+        mergeSort(values, mid + 1, end, comparator);
+        merge(values, start, mid, end);
+    }
+
+    static void merge(std::vector<std::shared_ptr<T>> values, int start, int mid, int end)
+    {
+        std::vector<int> v1;
+        std::vector<int> v2;
+        for (int i = start; i <= mid; i++)
+            v1.push_back(*values[i]);
+        for (int i = mid + 1; i <= end; i++)
+            v2.push_back(*values[i]);
+
+        int i, j, k;
+        for (i = 0, j = 0, k = start; i < v1.size() && j < v2.size(); k++) {
+            if (v1.at(i) <= v2.at(j)) {
+                *values.at(k) = v1.at(i);
+                i++;
+            }
+            else if (v1.at(i) > v2.at(j)) {
+                *values.at(k) = v2.at(j);
+                j++;
+            }
+        }
+
+        while (i < v1.size()) {
+            *values.at(k) = v1.at(i);
+            i++;
+            k++;
+        }
+
+        while (j < v2.size()) {
+            *values.at(k) = v2.at(j);
+            j++;
+            k++;
+        }
+        
     }
 };
 
